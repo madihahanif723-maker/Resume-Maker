@@ -10,8 +10,15 @@ function signup() {
     if (!name || !email || !password) {
         Swal.fire({
             icon: 'warning',
-            title: 'Missing Fields',
-            text: 'Please fill all signup fields'
+            title: '⚠️ Missing Fields',
+            text: 'Please fill all signup fields',
+            background: 'rgba(255,255,255,0.18)',
+            color: '#ffffff',
+            confirmButtonColor: '#f14343',
+            confirmButtonText: 'Got It',
+            backdrop: `rgba(241,67,67,0.3) left top no-repeat`,
+            showClass: { popup: 'animate__animated animate__fadeInDown' },
+            hideClass: { popup: 'animate__animated animate__fadeOutUp' }
         });
         return;
     }
@@ -23,8 +30,15 @@ function signup() {
     if (existingUser) {
         Swal.fire({
             icon: 'error',
-            title: 'Account Exists',
-            text: 'This email is already registered'
+            title: '❌ Account Exists',
+            text: 'This email is already registered',
+            background: 'rgba(255,255,255,0.18)',
+            color: '#ffffff',
+            confirmButtonColor: '#f14343',
+            confirmButtonText: 'Try Again',
+            backdrop: `rgba(241,67,67,0.3) left top no-repeat`,
+            showClass: { popup: 'animate__animated animate__shakeX' },
+            hideClass: { popup: 'animate__animated animate__fadeOutUp' }
         });
         return;
     }
@@ -41,8 +55,17 @@ function signup() {
 
     Swal.fire({
         icon: 'success',
-        title: 'Signup Successful',
-        text: 'Redirecting to Login Page...'
+        title: '✅ Signup Successful',
+        html: '<b>Welcome aboard! 🎉</b><br>Redirecting to Login...',
+        background: 'rgba(255,255,255,0.18)',
+        color: '#ffffff',
+        confirmButtonColor: '#28a745',
+        confirmButtonText: 'Continue',
+        backdrop: `rgba(40,199,151,0.3) left top no-repeat`,
+        showClass: { popup: 'animate__animated animate__zoomIn' },
+        hideClass: { popup: 'animate__animated animate__fadeOutDown' },
+        allowOutsideClick: false,
+        allowEscapeKey: false
     }).then(() => {
         window.location.href = "login.html";
     });
@@ -69,8 +92,15 @@ function login(event) {
     if (!matchedUser) {
         Swal.fire({
             icon: 'error',
-            title: 'Login Failed',
-            text: 'Invalid Name, Email or Password'
+            title: '❌ Login Failed',
+            text: 'Invalid Name, Email or Password',
+            background: 'rgba(255,255,255,0.18)',
+            color: '#ffffff',
+            confirmButtonColor: '#f14343',
+            confirmButtonText: 'Try Again',
+            backdrop: `rgba(241,67,67,0.3) left top no-repeat`,
+            showClass: { popup: 'animate__animated animate__shakeX' },
+            hideClass: { popup: 'animate__animated animate__fadeOutUp' }
         });
         return;
     }
@@ -79,8 +109,17 @@ function login(event) {
 
     Swal.fire({
         icon: 'success',
-        title: 'Login Successful',
-        text: 'Redirecting...'
+        title: '✅ Login Successful',
+        html: '<b>Welcome, ' + name + '! 🎉</b><br>Taking you to dashboard...',
+        background: 'rgba(255,255,255,0.18)',
+        color: '#ffffff',
+        confirmButtonColor: '#1f4ff0',
+        confirmButtonText: 'Go to Dashboard',
+        backdrop: `rgba(31,79,240,0.3) left top no-repeat`,
+        showClass: { popup: 'animate__animated animate__slideInDown' },
+        hideClass: { popup: 'animate__animated animate__fadeOutDown' },
+        allowOutsideClick: false,
+        allowEscapeKey: false
     }).then(() => {
         window.location.href = "cvcreation.html";
     });
@@ -101,8 +140,15 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!loggedInUser) {
                 Swal.fire({
                     icon: 'warning',
-                    title: 'Login Required',
-                    text: 'Please login first'
+                    title: '🔐 Login Required',
+                    text: 'Please login first to create CV',
+                    background: 'rgba(255,255,255,0.18)',
+                    color: '#ffffff',
+                    confirmButtonColor: '#f14343',
+                    confirmButtonText: 'Go to Login',
+                    backdrop: `rgba(241,67,67,0.3) left top no-repeat`,
+                    showClass: { popup: 'animate__animated animate__fadeInDown' },
+                    hideClass: { popup: 'animate__animated animate__fadeOutUp' }
                 });
                 return;
             }
@@ -124,15 +170,30 @@ document.addEventListener("DOMContentLoaded", function () {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Login Required',
-                    text: 'Please login first'
+                    text: 'Please login first',
+                    background: 'rgba(255,255,255,0.18)',
+                    color: '#ffffff',
+                    confirmButtonColor: '#f14343',
+                    confirmButtonText: 'Go to Login',
+                    backdrop: `rgba(241,67,67,0.3) left top no-repeat`,
+                    showClass: { popup: 'animate__animated animate__fadeInDown' },
+                    hideClass: { popup: 'animate__animated animate__fadeOutUp' }
                 });
                 return;
             }
 
             Swal.fire({
                 icon: 'success',
-                title: 'Opening Dashboard',
-                text: 'Redirecting to CV Form...'
+                title: '🎉 Opening Dashboard',
+                html: '<b>Redirecting to CV Form... 📝</b>',
+                background: 'rgba(255,255,255,0.18)',
+                color: '#ffffff',
+                confirmButtonColor: '#1f4ff0',
+                backdrop: `rgba(31,79,240,0.3) left top no-repeat`,
+                showClass: { popup: 'animate__animated animate__zoomIn' },
+                hideClass: { popup: 'animate__animated animate__fadeOutDown' },
+                allowOutsideClick: false,
+                allowEscapeKey: false
             }).then(() => {
                 window.location.href = "dashboard.html";
             });
@@ -148,8 +209,17 @@ function logout() {
 
     Swal.fire({
         icon: 'success',
-        title: 'Logged Out',
-        text: 'Redirecting to Login...'
+        title: '👋 Logged Out',
+        html: '<b>See you soon! 👋</b><br>Redirecting to Login...',
+        background: 'rgba(255,255,255,0.18)',
+        color: '#ffffff',
+        confirmButtonColor: '#176cc2',
+        confirmButtonText: 'Return to Login',
+        backdrop: `rgba(23,108,194,0.3) left top no-repeat`,
+        showClass: { popup: 'animate__animated animate__fadeInDown' },
+        hideClass: { popup: 'animate__animated animate__fadeOutDown' },
+        allowOutsideClick: false,
+        allowEscapeKey: false
     }).then(() => {
         window.location.href = "login.html";
     });
@@ -278,8 +348,15 @@ document.addEventListener("DOMContentLoaded", function () {
             ) {
                 Swal.fire({
                     icon: 'warning',
-                    title: 'Incomplete Form',
-                    text: 'Please fill all fields before proceeding'
+                    title: '⚠️ Incomplete Form',
+                    text: 'Please fill all fields before proceeding',
+                    background: 'rgba(255,255,255,0.18)',
+                    color: '#ffffff',
+                    confirmButtonColor: '#f14343',
+                    confirmButtonText: 'Complete Form',
+                    backdrop: `rgba(241,67,67,0.3) left top no-repeat`,
+                    showClass: { popup: 'animate__animated animate__fadeInDown' },
+                    hideClass: { popup: 'animate__animated animate__fadeOutUp' }
                 });
                 return;
             }
@@ -300,8 +377,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
             Swal.fire({
                 icon: 'success',
-                title: 'CV Saved',
-                text: 'Moving to Template Selection'
+                title: '✅ CV Saved',
+                html: '<b>Now choose your template! 🎨</b>',
+                background: 'rgba(255,255,255,0.18)',
+                color: '#ffffff',
+                confirmButtonColor: '#28a745',
+                confirmButtonText: 'Choose Template',
+                backdrop: `rgba(40,199,151,0.3) left top no-repeat`,
+                showClass: { popup: 'animate__animated animate__zoomIn' },
+                hideClass: { popup: 'animate__animated animate__fadeOutDown' },
+                allowOutsideClick: false,
+                allowEscapeKey: false
             }).then(() => {
                 window.location.href = "template.html";
             });
@@ -335,21 +421,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 Swal.fire({
                     icon: 'success',
                     title: '✨ Template Selected',
-                    html: '<b>Your CV Template is Ready 🚀</b>',
+                    html: '<b>Your CV Template is Ready 🚀</b><br>Generating your CV...',
                     background: 'rgba(255,255,255,0.18)',
                     color: '#ffffff',
                     confirmButtonColor: '#7b5cff',
-                    backdrop: `
-                        rgba(123,92,255,0.3)
-                        left top
-                        no-repeat
-                    `,
+                    confirmButtonText: 'View CV',
+                    backdrop: `rgba(123,92,255,0.3) left top no-repeat`,
                     showClass: {
                         popup: 'animate__animated animate__zoomIn'
                     },
                     hideClass: {
                         popup: 'animate__animated animate__fadeOutDown'
-                    }
+                    },
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
                 }).then(() => {
                     window.location.href = 'finalcv.html';
                 });

@@ -82,3 +82,120 @@ a {
     font-weight: bold;
     letter-spacing: 1px;
 }
+
+/* =========================
+   LOGIN INPUT STYLING
+========================= */
+.login-input,
+.form-control {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: white !important;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 1rem;
+}
+
+.login-input::placeholder,
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.login-input:focus,
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.25) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    box-shadow: 0 0 15px rgba(31, 172, 255, 0.3);
+    outline: none;
+}
+
+.login-label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: white;
+    display: block;
+}
+
+/* =========================
+   BUTTONS - PRIMARY STYLE
+========================= */
+.login-button,
+.btn-success,
+.btn {
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Login button specific */
+.login-button {
+    background: linear-gradient(135deg, #1f4ff0, #176cc2);
+    color: white;
+    width: 100%;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(31, 79, 240, 0.4);
+}
+
+.login-button:hover {
+    background: linear-gradient(135deg, #176cc2, #1f4ff0);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(31, 79, 240, 0.6);
+    color: white;
+}
+
+.login-button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(31, 79, 240, 0.4);
+}
+
+/* Sign up button */
+.btn-success {
+    background: linear-gradient(135deg, #28a745, #20c997) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #20c997, #28a745) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.6);
+    color: white !important;
+}
+
+.btn-success:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+}
+
+/* General button styling */
+.btn {
+    background: linear-gradient(135deg, #5570d4, #4361a3) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(85, 112, 212, 0.4);
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #4361a3, #5570d4) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(85, 112, 212, 0.6);
+    color: white !important;
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(85, 112, 212, 0.4);
+}
+
+/* Focus state for accessibility */
+.btn:focus,
+.login-button:focus,
+.btn-success:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
