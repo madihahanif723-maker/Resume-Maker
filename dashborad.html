@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item" id="logoutBtn">
+                        <button class="btn btn-danger ms-2" onclick="logout()">Logout</button>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container py-5">
+        <center>
+            <h1 class="text-center mb-4">CV FORM</h1>
+            <h6 id="create">PLZ FILL IN ALL THE FEILDS TO CREATE YOUR CV</h6>
+        </center>
+
+        <br>
+
+        <form id="cvForm" class="bg-white p-4 shadow rounded">
+
+            <!-- Name -->
+            <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+
+            <!-- Phone -->
+            <div class="mb-3">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" placeholder="+92 300 1234567" required>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" placeholder="example@domain.com" required>
+            </div>
+
+            <!-- Skills -->
+            <div class="mb-3">
+                <label class="form-label">Skills</label>
+                <input type="text" id="cv-skills" class="form-control" placeholder="Type skill and press Enter">
+                <div id="skills-container" class="mt-2"></div>
+            </div>
+
+            <!-- Languages -->
+            <div class="mb-3">
+                <label class="form-label">Languages Known</label>
+                <input type="text" id="cv-languages" class="form-control" placeholder="Type language and press Enter">
+                <div id="languages-container" class="mt-2"></div>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="mb-3">
+                <label class="form-label">Profile Image</label>
+                <input type="file" id="imgInput" class="form-control" accept="image/*" required>
+            </div>
+
+            <div class="mb-3 text-center">
+                <img id="previewImg" src="https://via.placeholder.com/120" class="rounded-circle" alt="Preview">
+            </div>
+
+            <!-- Education -->
+            <div class="mb-3">
+                <label class="form-label">Education</label>
+                <textarea id="education" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <!-- Experience -->
+            <div class="mb-3">
+                <label class="form-label">Work Experience</label>
+                <textarea id="experience" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <!-- About Me -->
+            <div class="mb-3">
+                <label class="form-label">About Me</label>
+
+                <!-- Toolbar -->
+                <div class="btn-group mb-2">
+                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                        onclick="format('bold')"><b>B</b></button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                        onclick="format('italic')"><i>I</i></button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                        onclick="format('underline')"><u>U</u></button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                        onclick="format('insertUnorderedList')">• List</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                        onclick="format('insertOrderedList')">1. List</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                        onclick="format('createLink', prompt('Enter URL','https://'))">Link</button>
+                </div>
+
+                <!-- Editor -->
+                <div id="about" contenteditable="true" class="form-control" style="min-height:120px;"></div>
+            </div>
+
+            <!-- Next -->
+            <button type="submit" class="btn btn-outline-secondary w-100">
+                Next: Select Template
+            </button>
+
+
+
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

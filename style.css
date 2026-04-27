@@ -1,0 +1,84 @@
+
+/* =========================
+   GLOBAL RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #176cc2, #f14343, #113249);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background overlay */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(4px);
+    z-index: -1;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-brand,
+.nav-link {
+    color: white !important;
+    font-weight: 600;
+}
+
+/* =========================
+   GLASSMORPHISM CARD STYLE
+========================= */
+.card,
+.sign-up,
+.login-box {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    color: white;
+}
+
+/* =========================
+   HEADINGS & TEXT
+========================= */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label,
+span,
+a {
+    color: white !important;
+}
+
+.login-title,
+.text-center h1,
+.text-center h3 {
+    font-weight: bold;
+    letter-spacing: 1px;
+}
