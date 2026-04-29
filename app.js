@@ -1,177 +1,195 @@
-
-/* =========================
-   SIGNUP FUNCTION
-========================= */
 function signup() {
-    let name = document.getElementById("signName")?.value.trim();
-    let email = document.getElementById("signEmail")?.value.trim();
-    let password = document.getElementById("signPassword")?.value.trim();
+    var name = document.getElementById("signName").value;
+    var email = document.getElementById("signEmail").value;
+    var password = document.getElementById("signPassword").value;
+
+
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+
+    var users = JSON.parse(localStorage.getItem("userdata")) || [];
 
     if (!name || !email || !password) {
         Swal.fire({
             icon: 'warning',
             title: '⚠️ Missing Fields',
-            text: 'Please fill all signup fields',
-            background: 'rgba(255,255,255,0.18)',
+            html: '<b>All fields are required!</b>',
+            background: 'rgba(13, 87, 180, 0.9)',
             color: '#ffffff',
-            confirmButtonColor: '#f14343',
-            confirmButtonText: 'Got It',
-            backdrop: `rgba(241,67,67,0.3) left top no-repeat`,
+            confirmButtonColor: '#ff9800',
+            confirmButtonText: 'OK',
+            backdrop: `rgba(13,87,180,0.3)`,
             showClass: { popup: 'animate__animated animate__fadeInDown' },
             hideClass: { popup: 'animate__animated animate__fadeOutUp' }
         });
-        return;
+        return false;
     }
 
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-
-    let existingUser = users.find(user => user.email === email);
-
-    if (existingUser) {
+    if (!emailRegex.test(email)) {
         Swal.fire({
             icon: 'error',
-            title: '❌ Account Exists',
-            text: 'This email is already registered',
-            background: 'rgba(255,255,255,0.18)',
+            title: '❌ Invalid Email',
+            html: '<b>Please enter a valid email address!</b>',
+            background: 'rgba(13, 87, 180, 0.9)',
             color: '#ffffff',
-            confirmButtonColor: '#f14343',
-            confirmButtonText: 'Try Again',
-            backdrop: `rgba(241,67,67,0.3) left top no-repeat`,
-            showClass: { popup: 'animate__animated animate__shakeX' },
+            confirmButtonColor: '#ff9800',
+            confirmButtonText: 'OK',
+            backdrop: `rgba(13,87,180,0.3)`,
+            showClass: { popup: 'animate__animated animate__fadeInDown' },
             hideClass: { popup: 'animate__animated animate__fadeOutUp' }
         });
-        return;
+        return false;
+    }
+    if (!passwordRegex.test(password)) {
+        Swal.fire({
+            icon: 'warning',
+            title: '🔒 Weak Password',
+            html: '<b>Password must contain:</b><br>• Uppercase letter (A-Z)<br>• Lowercase letter (a-z)<br>• Number (0-9)<br>• Special character (@$!%*?&)<br>• Minimum 8 characters',
+            background: 'rgba(13, 87, 180, 0.9)',
+            color: '#ffffff',
+            confirmButtonColor: '#ff9800',
+            confirmButtonText: 'OK',
+            backdrop: `rgba(13,87,180,0.3)`,
+            showClass: { popup: 'animate__animated animate__fadeInDown' },
+            hideClass: { popup: 'animate__animated animate__fadeOutUp' }
+        });
+        return false;
     }
 
-    let userObj = {
-        id: Date.now(),
-        name,
-        email,
-        password
-    };
+    var exist = users.some(user => user.email === email);
 
-    users.push(userObj);
-    localStorage.setItem("users", JSON.stringify(users));
+    if (exist) {
+        Swal.fire({
+            icon: 'warning',
+            title: '⚡ Email Exists',
+            html: '<b>This email is already registered!</b><br>Try logging in instead.',
+            background: 'rgba(13, 87, 180, 0.9)',
+            color: '#ffffff',
+            confirmButtonColor: '#ff9800',
+            confirmButtonText: 'OK',
+            backdrop: `rgba(13,87,180,0.3)`,
+            showClass: { popup: 'animate__animated animate__fadeInDown' },
+            hideClass: { popup: 'animate__animated animate__fadeOutUp' }
+        });
+        return false;
+    }
+
+    var userdata = { name, email, password };
+
+    users.push(userdata);
+    localStorage.setItem("userdata", JSON.stringify(users));
 
     Swal.fire({
         icon: 'success',
         title: '✅ Signup Successful',
-        html: '<b>Welcome aboard! 🎉</b><br>Redirecting to Login...',
-        background: 'rgba(255,255,255,0.18)',
+        html: '<b>Welcome! 🎉</b><br>Your account has been created.<br>Redirecting to login...',
+        background: 'rgba(13, 87, 180, 0.9)',
         color: '#ffffff',
-        confirmButtonColor: '#28a745',
+        confirmButtonColor: '#4caf50',
         confirmButtonText: 'Continue',
-        backdrop: `rgba(40,199,151,0.3) left top no-repeat`,
+        backdrop: `rgba(13,87,180,0.3)`,
         showClass: { popup: 'animate__animated animate__zoomIn' },
         hideClass: { popup: 'animate__animated animate__fadeOutDown' },
         allowOutsideClick: false,
         allowEscapeKey: false
-    }).then(() => {
-        window.location.href = "login.html";
-    });
+    })
+        .then(() => window.location.href = "login.html");
+
+    return false;
 }
+function login() {
+    // 1. Inputs se data uthana
+    var email = document.getElementById("login-email").value.trim();
+    var password = document.getElementById("login-password").value.trim();
+    var users = JSON.parse(localStorage.getItem("userdata")) || [];
 
-/* =========================
-   LOGIN FUNCTION
-========================= */
-function login(event) {
-    event.preventDefault();
+    if (!email || !password) {
+        Swal.fire({
+            icon: 'warning',
+            title: '⚠️ Missing Credentials',
+            html: '<b>Please enter email and password!</b>',
+            background: 'rgba(13, 87, 180, 0.9)',
+            color: '#ffffff',
+            confirmButtonColor: '#ff9800',
+            confirmButtonText: 'OK',
+            backdrop: `rgba(13,87,180,0.3)`,
+            showClass: { popup: 'animate__animated animate__fadeInDown' },
+            hideClass: { popup: 'animate__animated animate__fadeOutUp' }
+        });
+        return false;
+    }
 
-    let name = document.getElementById("name")?.value.trim();
-    let email = document.getElementById("login-email")?.value.trim();
-    let password = document.getElementById("login-password")?.value.trim();
+    var userData = users.find(u => u.email === email && u.password === password);
 
-    let users = JSON.parse(localStorage.getItem("users")) || [];
+    if (userData) {
+        localStorage.setItem("currentUser", JSON.stringify(userData));
 
-    let matchedUser = users.find(user =>
-        user.name === name &&
-        user.email === email &&
-        user.password === password
-    );
-
-    if (!matchedUser) {
+        Swal.fire({
+            icon: 'success',
+            title: '✅ Login Successful',
+            html: '<b>Welcome back! 👋</b><br>Opening your CV creator...',
+            background: 'rgba(13, 87, 180, 0.9)',
+            color: '#ffffff',
+            confirmButtonColor: '#4caf50',
+            confirmButtonText: 'Continue',
+            backdrop: `rgba(13,87,180,0.3)`,
+            showClass: { popup: 'animate__animated animate__zoomIn' },
+            hideClass: { popup: 'animate__animated animate__fadeOutDown' },
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        })
+            .then(() => window.location.href = "cvcreation.html");
+    } else {
         Swal.fire({
             icon: 'error',
             title: '❌ Login Failed',
-            text: 'Invalid Name, Email or Password',
-            background: 'rgba(255,255,255,0.18)',
+            html: '<b>Invalid email or password!</b><br>Please try again.',
+            background: 'rgba(13, 87, 180, 0.9)',
             color: '#ffffff',
-            confirmButtonColor: '#f14343',
-            confirmButtonText: 'Try Again',
-            backdrop: `rgba(241,67,67,0.3) left top no-repeat`,
-            showClass: { popup: 'animate__animated animate__shakeX' },
+            confirmButtonColor: '#ff9800',
+            confirmButtonText: 'OK',
+            backdrop: `rgba(13,87,180,0.3)`,
+            showClass: { popup: 'animate__animated animate__fadeInDown' },
             hideClass: { popup: 'animate__animated animate__fadeOutUp' }
         });
-        return;
     }
-
-    localStorage.setItem("loggedInUser", JSON.stringify(matchedUser));
-
+    return false;
+}
+function logout() {
     Swal.fire({
         icon: 'success',
-        title: '✅ Login Successful',
-        html: '<b>Welcome, ' + name + '! 🎉</b><br>Taking you to dashboard...',
-        background: 'rgba(255,255,255,0.18)',
+        title: '👋 Logged Out',
+        html: '<b>See you soon! 👋</b><br>Redirecting to Login...',
+        background: 'rgba(13, 12, 87, 0.93)',
         color: '#ffffff',
-        confirmButtonColor: '#1f4ff0',
-        confirmButtonText: 'Go to Dashboard',
-        backdrop: `rgba(31,79,240,0.3) left top no-repeat`,
-        showClass: { popup: 'animate__animated animate__slideInDown' },
+        confirmButtonColor: '#176cc2',
+        confirmButtonText: 'return false to Login',
+        backdrop: `rgba(23,108,194,0.3) left top no-repeat`,
+        showClass: { popup: 'animate__animated animate__fadeInDown' },
         hideClass: { popup: 'animate__animated animate__fadeOutDown' },
         allowOutsideClick: false,
         allowEscapeKey: false
-    }).then(() => {
-        window.location.href = "cvcreation.html";
+    }).then((result) => {
+        if (result.isConfirmed) {
+            localStorage.removeItem("currentUser");
+            window.location.href = "login.html";
+        }
     });
 }
 
-/* =========================
-   CV CREATION BUTTON
-========================= */
-document.addEventListener("DOMContentLoaded", function () {
-    let createBtn = document.querySelector(".card .btn");
-
-    if (createBtn) {
-        createBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-
-            let loggedInUser = localStorage.getItem("loggedInUser");
-
-            if (!loggedInUser) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: '🔐 Login Required',
-                    text: 'Please login first to create CV',
-                    background: 'rgba(255,255,255,0.18)',
-                    color: '#ffffff',
-                    confirmButtonColor: '#f14343',
-                    confirmButtonText: 'Go to Login',
-                    backdrop: `rgba(241,67,67,0.3) left top no-repeat`,
-                    showClass: { popup: 'animate__animated animate__fadeInDown' },
-                    hideClass: { popup: 'animate__animated animate__fadeOutUp' }
-                });
-                return;
-            }
-
-            window.location.href = "dashborad.html";
-        });
-    }
-
-    /* FIXED CV BUTTON CLICK */
-    let cvCreateBtn = document.querySelector("a.btn");
+document.addEventListener('DOMContentLoaded', function () {
+    var cvCreateBtn = document.querySelector("a.btn");
 
     if (cvCreateBtn) {
         cvCreateBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-
-            let loggedInUser = localStorage.getItem("loggedInUser");
-
+            var loggedInUser = localStorage.getItem("currentUser");
             if (!loggedInUser) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Login Required',
                     text: 'Please login first',
-                    background: 'rgba(255,255,255,0.18)',
+                    background: 'rgba(13, 10, 63, 0.81)',
                     color: '#ffffff',
                     confirmButtonColor: '#f14343',
                     confirmButtonText: 'Go to Login',
@@ -179,14 +197,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     showClass: { popup: 'animate__animated animate__fadeInDown' },
                     hideClass: { popup: 'animate__animated animate__fadeOutUp' }
                 });
-                return;
+                return false;
             }
 
             Swal.fire({
                 icon: 'success',
                 title: '🎉 Opening Dashboard',
                 html: '<b>Redirecting to CV Form... 📝</b>',
-                background: 'rgba(255,255,255,0.18)',
+                background: 'rgba(29, 14, 70, 0.85)',
                 color: '#ffffff',
                 confirmButtonColor: '#1f4ff0',
                 backdrop: `rgba(31,79,240,0.3) left top no-repeat`,
@@ -195,49 +213,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 allowOutsideClick: false,
                 allowEscapeKey: false
             }).then(() => {
-                window.location.href = "dashboard.html";
+                window.location.href = "cvcreation.html";
             });
+            return false;
         });
     }
 });
 
-/* =========================
-   LOGOUT FUNCTION
-========================= */
-function logout() {
-    localStorage.removeItem("loggedInUser");
 
-    Swal.fire({
-        icon: 'success',
-        title: '👋 Logged Out',
-        html: '<b>See you soon! 👋</b><br>Redirecting to Login...',
-        background: 'rgba(255,255,255,0.18)',
-        color: '#ffffff',
-        confirmButtonColor: '#176cc2',
-        confirmButtonText: 'Return to Login',
-        backdrop: `rgba(23,108,194,0.3) left top no-repeat`,
-        showClass: { popup: 'animate__animated animate__fadeInDown' },
-        hideClass: { popup: 'animate__animated animate__fadeOutDown' },
-        allowOutsideClick: false,
-        allowEscapeKey: false
-    }).then(() => {
-        window.location.href = "login.html";
-    });
-}
-
-/* =========================
-   IMAGE PREVIEW
-========================= */
 document.addEventListener("DOMContentLoaded", function () {
-    let imgInput = document.getElementById("imgInput");
-    let previewImg = document.getElementById("previewImg");
+    var imgInput = document.getElementById("imgInput");
+    var previewImg = document.getElementById("previewImg");
 
     if (imgInput) {
         imgInput.addEventListener("change", function () {
-            let file = this.files[0];
+            var file = this.files[0];
 
             if (file) {
-                let reader = new FileReader();
+                var reader = new FileReader();
 
                 reader.onload = function (e) {
                     previewImg.src = e.target.result;
@@ -260,23 +253,22 @@ function format(command, value = null) {
    SKILLS TAG SYSTEM
 ========================= */
 document.addEventListener("DOMContentLoaded", function () {
-    let skillInput = document.getElementById("cv-skills");
-    let skillContainer = document.getElementById("skills-container");
+    var skillInput = document.getElementById("cv-skills");
+    var skillContainer = document.getElementById("skills-container");
 
     if (skillInput) {
         skillInput.addEventListener("keydown", function (e) {
             if (e.key === "Enter") {
-                e.preventDefault();
-
-                let skill = skillInput.value.trim();
+                var skill = skillInput.value.trim();
 
                 if (skill !== "") {
-                    let tag = document.createElement("span");
+                    var tag = document.createElement("span");
                     tag.innerText = skill;
                     skillContainer.appendChild(tag);
 
                     skillInput.value = "";
                 }
+                return false;
             }
         });
     }
@@ -286,23 +278,22 @@ document.addEventListener("DOMContentLoaded", function () {
    LANGUAGES TAG SYSTEM
 ========================= */
 document.addEventListener("DOMContentLoaded", function () {
-    let languageInput = document.getElementById("cv-languages");
-    let languageContainer = document.getElementById("languages-container");
+    var languageInput = document.getElementById("cv-languages");
+    var languageContainer = document.getElementById("languages-container");
 
     if (languageInput) {
         languageInput.addEventListener("keydown", function (e) {
             if (e.key === "Enter") {
-                e.preventDefault();
-
-                let language = languageInput.value.trim();
+                var language = languageInput.value.trim();
 
                 if (language !== "") {
-                    let tag = document.createElement("span");
+                    var tag = document.createElement("span");
                     tag.innerText = language;
                     languageContainer.appendChild(tag);
 
                     languageInput.value = "";
                 }
+                return false;
             }
         });
     }
@@ -312,26 +303,26 @@ document.addEventListener("DOMContentLoaded", function () {
    DASHBOARD FORM SUBMIT
 ========================= */
 document.addEventListener("DOMContentLoaded", function () {
-    let cvForm = document.getElementById("cvForm");
+    var cvForm = document.getElementById("cvForm");
 
     if (cvForm) {
         cvForm.addEventListener("submit", function (e) {
-            e.preventDefault();
+            return false;
 
-            let fullName = document.getElementById("name")?.value.trim();
-            let phone = document.getElementById("phone")?.value.trim();
-            let email = document.getElementById("email")?.value.trim();
-            let education = document.getElementById("education")?.value.trim();
-            let experience = document.getElementById("experience")?.value.trim();
-            let about = document.getElementById("about")?.innerHTML.trim();
-            let image = document.getElementById("previewImg")?.src;
+            var fullName = document.getElementById("name")?.value.trim();
+            var phone = document.getElementById("phone")?.value.trim();
+            var email = document.getElementById("email")?.value.trim();
+            var education = document.getElementById("education")?.value.trim();
+            var experience = document.getElementById("experience")?.value.trim();
+            var about = document.getElementById("about")?.innerHTML.trim();
+            var image = document.getElementById("previewImg")?.src;
 
-            let skills = [];
+            var skills = [];
             document.querySelectorAll("#skills-container span").forEach(tag => {
                 skills.push(tag.innerText);
             });
 
-            let languages = [];
+            var languages = [];
             document.querySelectorAll("#languages-container span").forEach(tag => {
                 languages.push(tag.innerText);
             });
@@ -350,18 +341,18 @@ document.addEventListener("DOMContentLoaded", function () {
                     icon: 'warning',
                     title: '⚠️ Incomplete Form',
                     text: 'Please fill all fields before proceeding',
-                    background: 'rgba(255,255,255,0.18)',
+                    background: 'rgba(25, 14, 90, 0.86)',
                     color: '#ffffff',
                     confirmButtonColor: '#f14343',
-                    confirmButtonText: 'Complete Form',
+                    confirmButtonText: 'Compvare Form',
                     backdrop: `rgba(241,67,67,0.3) left top no-repeat`,
                     showClass: { popup: 'animate__animated animate__fadeInDown' },
                     hideClass: { popup: 'animate__animated animate__fadeOutUp' }
                 });
-                return;
+                return false;
             }
 
-            let cvData = {
+            var cvData = {
                 fullName,
                 phone,
                 email,
@@ -379,7 +370,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 icon: 'success',
                 title: '✅ CV Saved',
                 html: '<b>Now choose your template! 🎨</b>',
-                background: 'rgba(255,255,255,0.18)',
+                background: 'rgba(29, 12, 70, 0.83)',
                 color: '#ffffff',
                 confirmButtonColor: '#28a745',
                 confirmButtonText: 'Choose Template',
@@ -399,9 +390,9 @@ document.addEventListener("DOMContentLoaded", function () {
    PAGE PROTECTION
 ========================= */
 document.addEventListener("DOMContentLoaded", function () {
-    let loggedInUser = localStorage.getItem("loggedInUser");
+    var loggedInUser = localStorage.getItem("currentUser");
 
-    let currentPage = window.location.pathname;
+    var currentPage = window.location.pathname;
 
     if (
         (currentPage.includes("cvcreation.html") || currentPage.includes("dashboard.html"))
@@ -411,32 +402,74 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-        document.querySelectorAll('.select-template').forEach(button => {
-            button.addEventListener('click', function () {
+document.querySelectorAll('.select-template').forEach(button => {
+    button.addEventListener('click', function () {
 
-                let selectedTemplate = this.getAttribute('data-template');
+        var selectedTemplate = this.getAttribute('data-template');
 
-                localStorage.setItem('selectedTemplate', selectedTemplate);
+        localStorage.setItem('selectedTemplate', selectedTemplate);
 
-                Swal.fire({
-                    icon: 'success',
-                    title: '✨ Template Selected',
-                    html: '<b>Your CV Template is Ready 🚀</b><br>Generating your CV...',
-                    background: 'rgba(255,255,255,0.18)',
-                    color: '#ffffff',
-                    confirmButtonColor: '#7b5cff',
-                    confirmButtonText: 'View CV',
-                    backdrop: `rgba(123,92,255,0.3) left top no-repeat`,
-                    showClass: {
-                        popup: 'animate__animated animate__zoomIn'
-                    },
-                    hideClass: {
-                        popup: 'animate__animated animate__fadeOutDown'
-                    },
-                    allowOutsideClick: false,
-                    allowEscapeKey: false
-                }).then(() => {
-                    window.location.href = 'finalcv.html';
-                });
-            });
+        Swal.fire({
+            icon: 'success',
+            title: '✨ Template Selected',
+            html: '<b>Your CV Template is Ready 🚀</b><br>Generating your CV...',
+            background: 'rgba(27, 7, 99, 0.87)',
+            color: '#ffffff',
+            confirmButtonColor: '#7b5cff',
+            confirmButtonText: 'View CV',
+            backdrop: `rgba(123,92,255,0.3) left top no-repeat`,
+            showClass: {
+                popup: 'animate__animated animate__zoomIn'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutDown'
+            },
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then(() => {
+            window.location.href = 'finalcv.html';
         });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    var rawData = localStorage.getItem("cvData");
+    var data = JSON.parse(rawData);
+
+    // 2. Simple text data set karna
+    document.getElementById("displayName").innerText = data.fullName || "Your Name";
+    document.getElementById("displayEmail").innerText = data.email || "Email N/A";
+    document.getElementById("displayPhone").innerText = data.phone || "Phone N/A";
+    document.getElementById("displayEducation").innerText = data.education || "No Education Details";
+    document.getElementById("displayExperience").innerText = data.experience || "No Experience Details";
+    document.getElementById("displayAbout").innerHTML = data.about || "No About details provided.";
+
+    // 3. Image handle karna
+    if (data.image && data.image !== "") {
+        var imgTag = document.getElementById("displayImg");
+        imgTag.src = data.image;
+        imgTag.style.display = "inline-block";
+    }
+
+    // 4. Skills Display (Loop laga kar badges banana)
+    var skillsContainer = document.getElementById("displaySkills");
+    if (data.skills && data.skills.length > 0) {
+        data.skills.forEach(function(skill) {
+            var span = document.createElement("span");
+            span.className = "tag-badge"; // Bootstrap jaisa custom style
+            span.innerText = skill;
+            skillsContainer.appendChild(span);
+        });
+    }
+
+    // 5. Languages Display
+    var langContainer = document.getElementById("displayLanguages");
+    if (data.languages && data.languages.length > 0) {
+        data.languages.forEach(function(lang) {
+            var span = document.createElement("span");
+            span.className = "tag-badge bg-secondary"; // Different co
+            span.innerText = lang;
+            langContainer.appendChild(span);
+        });
+    }
+});
