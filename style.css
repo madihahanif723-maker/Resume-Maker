@@ -263,6 +263,39 @@ input::placeholder {
     margin: 5px;
     font-size: 0.9rem;
 }
+#previewImg{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+#cvForm {
+     background: rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    padding: 30px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 800px;
+}
+.widthsel {
+    width: 100%;
+}
+.temp {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    padding: 30px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 800px;
+}
 
 @media print {
     .no-print {

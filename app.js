@@ -98,7 +98,9 @@ function signup() {
 
     return false;
 }
-function login() {
+function login(event) {
+    if (event) event.preventDefault();
+    
     // 1. Inputs se data uthana
     var email = document.getElementById("login-email").value.trim();
     var password = document.getElementById("login-password").value.trim();
@@ -120,7 +122,7 @@ function login() {
         return false;
     }
 
-    var userData = users.find(u => u.email === email && u.password === password);
+   var userData = users.find(u => u.email === email && u.password === password);
 
     if (userData) {
         localStorage.setItem("currentUser", JSON.stringify(userData));
