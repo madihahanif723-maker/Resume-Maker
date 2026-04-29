@@ -10,7 +10,7 @@
 
 body {
     min-height: 100vh;
-    background: linear-gradient(135deg, #06131f, #250450, #000000);
+    background-image: url(https://64.media.tumblr.com/c3b3cd6883925960057b43c187c70377/88a661889eb1d588-a4/s500x750/04ee5a55911284caf626c9eb26013621ef4195ea.gif);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -295,6 +295,62 @@ input::placeholder {
     color: white;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     width: 800px;
+}
+
+/* =========================
+   TEMPLATE STYLES
+========================= */
+.template-preview {
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.template-one {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: bold;
+}
+
+.template-two {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    font-weight: bold;
+}
+
+.template-three {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    font-weight: bold;
+}
+
+.template-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.template-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.select-template {
+    background: rgba(255, 255, 255, 0.3) !important;
+    border: 2px solid white !important;
+    color: white !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.select-template:hover {
+    background: white !important;
+    color: #333 !important;
+    transform: scale(1.05);
 }
 
 @media print {
